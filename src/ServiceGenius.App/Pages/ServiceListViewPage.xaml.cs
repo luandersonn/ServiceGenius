@@ -19,4 +19,6 @@ public sealed partial class ServiceListViewPage : Page
             RequestedTheme = ActualTheme
         }.ShowAsync();
     }
+
+    private void GoToSettingsPage() => Frame.Navigate(typeof(SettingsPage));
 }

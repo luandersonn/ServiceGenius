@@ -26,7 +26,7 @@ public partial class App : Application
 
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
-        MainWindow = new GeniusWindow(typeof(MainPage))
+        MainWindow = new GeniusWindow(typeof(ServiceListViewPage))
         {
             PersistenceId = "MainWindow"
         };

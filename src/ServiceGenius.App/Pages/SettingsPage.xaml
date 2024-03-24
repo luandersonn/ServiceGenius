@@ -2,6 +2,7 @@
 <Page x:Class="ServiceGenius.App.Pages.SettingsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="using:ServiceGenius.App.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:viewmodels="using:ServiceGenius.App.ViewModels"
@@ -24,44 +25,61 @@
 
     </Page.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="1000*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
 
-            <StackPanel Grid.Column="1"
-                        MaxWidth="{StaticResource ContentMaxWidth}"
-                        Padding="16,4">
-                <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="Settings" />
-                <TextBlock Text="Service Genius" />
+        <controls:TitleBarControl BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}"
+                                  BorderThickness="0,0,0,1"
+                                  DisplayOptions="None">
+            <Grid>
+                <Button Click="{x:Bind GoBack}" Style="{ThemeResource NavigationBackButtonNormalStyle}" />
+            </Grid>
+        </controls:TitleBarControl>
 
-                <TextBlock Margin="0,10,0,0" Text="Informations" />
-                <Grid Style="{StaticResource ContentPanelStyle}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Row="1"
+                      Background="{ThemeResource NavigationViewContentBackground}"
+                      VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="1000*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                    <TextBlock Opacity="0.7" Text="Version" />
+                <StackPanel Grid.Column="1"
+                            MaxWidth="{StaticResource ContentMaxWidth}"
+                            Padding="16,4">
+                    <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="Settings" />
+                    <TextBlock Text="Service Genius" />
 
-                    <TextBlock Grid.Column="1"
-                               HorizontalAlignment="Right"
-                               Text="{x:Bind ViewModel.Version}" />
-                </Grid>
+                    <TextBlock Margin="0,10,0,0" Text="Informations" />
+                    <Grid Style="{StaticResource ContentPanelStyle}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Opacity="0.7" Text="Version" />
+
+                        <TextBlock Grid.Column="1"
+                                   HorizontalAlignment="Right"
+                                   Text="{x:Bind ViewModel.Version}" />
+                    </Grid>
 
 
-                <TextBlock Margin="0,10,0,0" Text="Libraries" />
-                <Grid Style="{StaticResource ContentPanelStyle}">
-                    <StackPanel>
-                        <HyperlinkButton Content="WinUIEx" NavigateUri="https://github.com/dotMorten/WinUIEx" />
-                        <HyperlinkButton Content="CommunityToolkit" NavigateUri="https://github.com/CommunityToolkit" />
-                    </StackPanel>
-                </Grid>
-            </StackPanel>
+                    <TextBlock Margin="0,10,0,0" Text="Libraries" />
+                    <Grid Style="{StaticResource ContentPanelStyle}">
+                        <StackPanel>
+                            <HyperlinkButton Content="WinUIEx" NavigateUri="https://github.com/dotMorten/WinUIEx" />
+                            <HyperlinkButton Content="CommunityToolkit" NavigateUri="https://github.com/CommunityToolkit" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
 
-        </Grid>
-    </ScrollViewer>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
 </Page>
