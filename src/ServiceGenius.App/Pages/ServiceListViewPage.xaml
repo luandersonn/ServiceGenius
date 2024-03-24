@@ -40,6 +40,7 @@
                                 Grid.ColumnSpan="1"
                                 Margin="4,0"
                                 VerticalAlignment="Center"
+                                AccessKey="Q"
                                 PlaceholderText="Search for services"
                                 QueryIcon="Find"
                                 TextChanged="OnSearchBoxTextChanged">
@@ -54,6 +55,7 @@
                         Margin="0,8"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Stretch"
+                        AccessKey="S"
                         Click="{x:Bind GoToSettingsPage, Mode=OneTime}">
                     <AnimatedIcon Width="16" Height="16">
                         <AnimatedIcon.Source>
@@ -91,7 +93,9 @@
                                 </Grid>
                             </CommandBar.Content>
 
-                            <AppBarButton Command="{x:Bind ViewModel.RefreshServicesCommand}" Label="Refresh">
+                            <AppBarButton AccessKey="R"
+                                          Command="{x:Bind ViewModel.RefreshServicesCommand}"
+                                          Label="Refresh">
                                 <AppBarButton.Icon>
                                     <FontIcon x:Name="refreshButtonIcon"
                                               VerticalAlignment="Center"
@@ -133,9 +137,10 @@
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <Grid Grid.RowSpan="2"
+                        <Grid Grid.RowSpan="3"
                               Width="30"
                               Height="30"
                               VerticalAlignment="Center">
@@ -165,8 +170,13 @@
                                    Text="{x:Bind Description}"
                                    TextTrimming="CharacterEllipsis" />
 
+                        <TextBlock Grid.Row="2"
+                                   Grid.Column="1"
+                                   FontSize="12"
+                                   Text="{x:Bind Status}" />
 
-                        <FontIcon Grid.RowSpan="2"
+
+                        <FontIcon Grid.RowSpan="3"
                                   Grid.Column="2"
                                   FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                   FontSize="15"

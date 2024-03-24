@@ -46,12 +46,8 @@ public partial class ServiceControllerViewModel : ObservableObject
     public string ServiceName => Service.ServiceName;
     public string Description { get; private set; }
     public string PathToExecutable { get; private set; }
-
-    [ObservableProperty]
-    private string _status;
-
-    [ObservableProperty]
-    private string _startMode;
+    public string Status => StatusMap[Service.Status];
+    public string StartMode => StartModeMap[Service.StartType];
 
     private void LoadInfos()
     {
@@ -60,8 +56,6 @@ public partial class ServiceControllerViewModel : ObservableObject
         {
             Description = $"{serviceObject[nameof(Description)]}";
             PathToExecutable = $"{serviceObject["PathName"]}";
-            Status = StatusMap[Service.Status];
-            StartMode = StartModeMap[Service.StartType];
         }
         catch (Exception ex)
         {
