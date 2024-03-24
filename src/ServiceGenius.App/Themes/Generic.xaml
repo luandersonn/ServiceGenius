@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary x:Class="ServiceGenius.App.Themes.Generic"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:ServiceGenius.App">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Controls/TitleBarControl/TitleBarControl.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

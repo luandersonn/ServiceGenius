@@ -1,30 +1,26 @@
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using ServiceGenius.App.Pages;
 using System;
-using System.Linq;
 using WinUIEx;
 
 namespace ServiceGenius.App;
 
 public sealed partial class MainWindow : WindowEx
 {
-    public MainWindow() => InitializeComponent();
+    private readonly Type destinationPage;
+    private readonly object navigationParameter;
 
-    private void OnGridLoaded(object sender, RoutedEventArgs e) => navigationViewControl.SelectedItem = navigationViewControl.MenuItems.FirstOrDefault();
-
-    private void OnNavigationViewSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+    public MainWindow(Type destinationPage, object navigationParameter = null)
     {
-        Type pageType = (string)args.SelectedItemContainer.Tag switch
-        {
-            "services" => typeof(ServiceListViewPage),
-            _ when args.IsSettingsSelected => typeof(SettingsPage),
-            _ => null,
-        };
+        InitializeComponent();
+        this.destinationPage = destinationPage;
+        this.navigationParameter = navigationParameter;
+    }
 
-        if (pageType is not null)
-        {
-            frame.Navigate(pageType, args.RecommendedNavigationTransitionInfo);
-        }
+    private void OnUILoaded(object sender, RoutedEventArgs e)
+    {
+        UIElement element = (UIElement)sender;
+        App.AllWindows.TryAdd(element.XamlRoot, this);
+
+        frame.Navigate(destinationPage, navigationParameter);
     }
 }

@@ -2,31 +2,16 @@
 <winuiex:WindowEx x:Class="ServiceGenius.App.MainWindow"
                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:controls="using:ServiceGenius.App.Controls"
                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                   xmlns:winuiex="using:WinUIEx"
-                  Title="Service Genius"
-                  PersistenceId="MainWindow"
                   mc:Ignorable="d">
     <winuiex:WindowEx.SystemBackdrop>
         <MicaBackdrop Kind="Base" />
     </winuiex:WindowEx.SystemBackdrop>
 
-    <Grid Loaded="OnGridLoaded">
-        <NavigationView x:Name="navigationViewControl"
-                        CompactModeThresholdWidth="260"
-                        IsBackButtonVisible="Collapsed"
-                        OpenPaneLength="260"
-                        PaneDisplayMode="Auto"
-                        SelectionChanged="OnNavigationViewSelectionChanged">
-            <NavigationView.MenuItems>
-                <NavigationViewItem Content="Services"
-                                    Icon="Accept"
-                                    Tag="services" />
-            </NavigationView.MenuItems>
-            <Grid>
-                <Frame x:Name="frame" />
-            </Grid>
-        </NavigationView>
+    <Grid Loaded="OnUILoaded">
+        <Frame x:Name="frame" />
     </Grid>
 </winuiex:WindowEx>
