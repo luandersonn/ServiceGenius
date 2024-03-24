@@ -21,4 +21,21 @@ public sealed partial class ServiceListViewPage : Page
     }
 
     private void GoToSettingsPage() => Frame.Navigate(typeof(SettingsPage));
+
+    private void OnSearchBoxTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        if (args.CheckCurrent())
+        {
+            string queryTerm = sender.Text;
+            if (string.IsNullOrWhiteSpace(queryTerm))
+            {
+                ViewModel.Services.Filter = null;
+            }
+            else
+            {
+                StringComparison sc = StringComparison.InvariantCultureIgnoreCase;
+                ViewModel.Services.Filter = item => item.ServiceName.Contains(queryTerm, sc) || item.DisplayName.Contains(queryTerm, sc) || item.Description.Contains(queryTerm, sc);
+            }
+        }
+    }
 }

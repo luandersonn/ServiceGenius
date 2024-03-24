@@ -41,7 +41,8 @@
                                 Margin="4,0"
                                 VerticalAlignment="Center"
                                 PlaceholderText="Search for services"
-                                QueryIcon="Find">
+                                QueryIcon="Find"
+                                TextChanged="OnSearchBoxTextChanged">
                     <AutoSuggestBox.Transitions>
                         <TransitionCollection>
                             <RepositionThemeTransition />

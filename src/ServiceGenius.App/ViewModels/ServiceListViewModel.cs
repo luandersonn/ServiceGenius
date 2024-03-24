@@ -1,23 +1,23 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ServiceGenius.App.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.ServiceProcess;
 using System.Threading.Tasks;
 
 namespace ServiceGenius.App.ViewModels;
 
-public class ServiceListViewModel : ObservableObject
+public partial class ServiceListViewModel : ObservableObject
 {
     public ServiceListViewModel()
     {
-        Services = [];
+        Services = new SortedObservableCollection<ServiceControllerViewModel>(new ServiceControllerViewModelComparer(ServiceSortAttribute.DisplayName, ServiceSortDirection.Asc));
 
         RefreshServicesCommand = new AsyncRelayCommand(RefreshServicesAsync);
     }
 
-    public ObservableCollection<ServiceControllerViewModel> Services { get; }
+    public SortedObservableCollection<ServiceControllerViewModel> Services { get; }
     public IAsyncRelayCommand RefreshServicesCommand { get; }
 
     private async Task RefreshServicesAsync()
