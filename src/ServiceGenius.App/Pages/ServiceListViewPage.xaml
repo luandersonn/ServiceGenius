@@ -16,7 +16,10 @@
     </Page.Resources>
 
     <Grid>
-        <ListView ItemsSource="{x:Bind ViewModel.Services}" SelectionMode="None">
+        <ListView IsItemClickEnabled="True"
+                  ItemClick="OnListViewItemClick"
+                  ItemsSource="{x:Bind ViewModel.Services}"
+                  SelectionMode="None">
             <ListViewBase.ItemContainerStyle>
                 <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem">
                     <Setter Property="Padding" Value="0" />
@@ -98,7 +101,7 @@
                                    Grid.Column="1"
                                    VerticalAlignment="Center"
                                    FontSize="16"
-                                   Text="{x:Bind Name}"
+                                   Text="{x:Bind DisplayName}"
                                    TextWrapping="Wrap" />
 
 

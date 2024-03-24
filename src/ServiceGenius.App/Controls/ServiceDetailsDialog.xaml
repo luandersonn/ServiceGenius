@@ -1,0 +1,66 @@
+<ContentDialog x:Class="ServiceGenius.App.Controls.ServiceDetailsDialog"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               Title="{x:Bind Service.DisplayName}"
+               Background="{ThemeResource AcrylicInAppFillColorDefaultBrush}"
+               CloseButtonText="Close"
+               Style="{StaticResource DefaultContentDialogStyle}"
+               mc:Ignorable="d">
+
+    <ContentDialog.Resources>
+        <Style x:Key="ItemHeaderTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Margin" Value="0,12,0,0" />
+        </Style>
+
+        <Style x:Key="ItemValueTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Opacity" Value="0.70" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="IsTextSelectionEnabled" Value="True" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+    </ContentDialog.Resources>
+
+    <Grid>
+        <ScrollView>
+            <StackPanel>
+                <TextBlock Margin="0"
+                           Style="{StaticResource ItemHeaderTextBlockStyle}"
+                           Text="Name" />
+                <TextBlock Style="{StaticResource ItemValueTextBlockStyle}">
+                    <Run Text="{x:Bind Service.DisplayName}" />
+                    <Run Text="(" /><Run Text="{x:Bind Service.ServiceName}" /><Run Text=")" />
+                </TextBlock>
+
+                <TextBlock Style="{StaticResource ItemHeaderTextBlockStyle}" Text="Description" />
+                <TextBlock Style="{StaticResource ItemValueTextBlockStyle}" Text="{x:Bind Service.Description}" />
+
+                <TextBlock Style="{StaticResource ItemHeaderTextBlockStyle}" Text="Path to executable" />
+                <TextBlock Style="{StaticResource ItemValueTextBlockStyle}" Text="{x:Bind Service.PathToExecutable}" />
+
+                <ComboBox Margin="0,8,0,0"
+                          HorizontalAlignment="Stretch"
+                          IsEnabled="False"
+                          ItemsSource="{x:Bind Service.StartModeValues}"
+                          SelectedItem="{x:Bind Service.StartMode}">
+                    <ComboBox.Header>
+                        <TextBlock Margin="0"
+                                   Style="{StaticResource ItemHeaderTextBlockStyle}"
+                                   Text="Startup type" />
+                    </ComboBox.Header>
+                </ComboBox>
+
+                <Rectangle Height="1"
+                           Margin="0,12"
+                           Fill="{ThemeResource NavigationViewItemSeparatorForeground}" />
+
+                <TextBlock Margin="0"
+                           Style="{StaticResource ItemHeaderTextBlockStyle}"
+                           Text="Status" />
+                <TextBlock Style="{StaticResource ItemValueTextBlockStyle}" Text="{x:Bind Service.Status, Mode=OneWay}" />
+            </StackPanel>
+        </ScrollView>
+    </Grid>
+</ContentDialog>

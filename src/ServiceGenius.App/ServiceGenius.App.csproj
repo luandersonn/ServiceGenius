@@ -11,6 +11,7 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Controls\ServiceDetailsDialog.xaml" />
     <None Remove="Controls\TitleBarControl\TitleBarControl.xaml" />
     <None Remove="Pages\MainPage.xaml" />
     <None Remove="Pages\ServiceListViewPage.xaml" />
@@ -89,4 +90,10 @@
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
+  <ItemGroup>
+    <CustomAdditionalCompileInputs Remove="Controls\ServiceDetailsDialog.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Remove="Controls\ServiceDetailsDialog.xaml" />
+  </ItemGroup>
 </Project>

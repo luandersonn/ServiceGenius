@@ -26,10 +26,9 @@ public class ServiceListViewModel : ObservableObject
 
         List<ServiceControllerViewModel> viewModels = await Task.Run(() =>
         {
-
             ServiceController[] services = ServiceController.GetServices();
 
-            return services.OrderBy(s => s.ServiceName)
+            return services.OrderBy(s => s.DisplayName)
                            .Select(service => new ServiceControllerViewModel(service))
                            .ToList();
         });
