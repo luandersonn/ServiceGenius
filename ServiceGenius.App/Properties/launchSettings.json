@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ServiceGenius.App (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ServiceGenius.App (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

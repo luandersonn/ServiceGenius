@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page x:Class="ServiceGenius.App.Pages.ServiceListViewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:viewmodels="using:ServiceGenius.App.ViewModels"
+      mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewmodels:ServiceListViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+    <Page.Resources>
+        <x:Double x:Key="ContentMaxWidth">1036</x:Double>
+    </Page.Resources>
+
+    <Grid>
+        <ListView ItemsSource="{x:Bind ViewModel.Services}" SelectionMode="None">
+            <ListViewBase.ItemContainerStyle>
+                <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem">
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="Margin" Value="12,1" />
+                    <Setter Property="MaxWidth" Value="{StaticResource ContentMaxWidth}" />
+                </Style>
+            </ListViewBase.ItemContainerStyle>
+
+            <ListViewBase.Header>
+                <Border MaxWidth="{StaticResource ContentMaxWidth}" Margin="16,4">
+                    <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="Services" />
+                </Border>
+            </ListViewBase.Header>
+
+            <ListViewBase.Footer>
+                <Rectangle Height="32" />
+            </ListViewBase.Footer>
+
+            <ListViewBase.ItemTemplate>
+                <DataTemplate x:DataType="viewmodels:ServiceControllerViewModel">
+                    <Grid Margin="2,0"
+                          Padding="8,16"
+                          Background="{ThemeResource ExpanderBackground}"
+                          BorderBrush="{ThemeResource ExpanderContentBorderBrush}"
+                          BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}"
+                          ColumnSpacing="8"
+                          CornerRadius="{ThemeResource ControlCornerRadius}">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="40" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.RowSpan="2"
+                              Width="30"
+                              Height="30"
+                              VerticalAlignment="Center">
+                            <FontIcon HorizontalAlignment="Left"
+                                      VerticalAlignment="Top"
+                                      FontSize="20"
+                                      Glyph="&#xE713;" />
+                            <FontIcon Margin="15,17,0,0"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Top"
+                                      FontSize="10"
+                                      Glyph="&#xE713;" />
+                        </Grid>
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="1"
+                                   VerticalAlignment="Center"
+                                   FontSize="16"
+                                   Text="{x:Bind Name}"
+                                   TextWrapping="Wrap" />
+
+
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="1"
+                                   FontSize="12"
+                                   Opacity="0.7"
+                                   Text="{x:Bind Description}"
+                                   TextTrimming="CharacterEllipsis" />
+
+
+                        <FontIcon Grid.RowSpan="2"
+                                  Grid.Column="2"
+                                  FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                  FontSize="15"
+                                  Glyph="&#xE76C;" />
+                    </Grid>
+                </DataTemplate>
+            </ListViewBase.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
