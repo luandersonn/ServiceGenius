@@ -27,7 +27,31 @@
 
             <ListViewBase.Header>
                 <Border MaxWidth="{StaticResource ContentMaxWidth}" Margin="16,4">
-                    <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="Services" />
+                    <Grid>
+                        <CommandBar DefaultLabelPosition="Right">
+                            <CommandBar.Content>
+                                <Grid>
+                                    <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="Services" />
+                                </Grid>
+                            </CommandBar.Content>
+
+                            <AppBarButton Command="{x:Bind ViewModel.RefreshServicesCommand}" Label="Refresh">
+                                <AppBarButton.Icon>
+                                    <FontIcon x:Name="refreshButtonIcon"
+                                              VerticalAlignment="Center"
+                                              Glyph="&#xE117;"
+                                              RenderTransformOrigin="0.50,0.50">
+                                        <FontIcon.RenderTransform>
+                                            <CompositeTransform />
+                                        </FontIcon.RenderTransform>
+                                    </FontIcon>
+                                </AppBarButton.Icon>
+                                <AppBarButton.KeyboardAccelerators>
+                                    <KeyboardAccelerator Key="F5" />
+                                </AppBarButton.KeyboardAccelerators>
+                            </AppBarButton>
+                        </CommandBar>
+                    </Grid>
                 </Border>
             </ListViewBase.Header>
 
@@ -95,5 +119,26 @@
                 </DataTemplate>
             </ListViewBase.ItemTemplate>
         </ListView>
+
+        <ProgressRing IsActive="{x:Bind ViewModel.RefreshServicesCommand.IsRunning, Mode=OneWay}" />
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="RefreshProgressVisualStates">
+                <VisualState x:Name="NotWorkingVisualState" />
+                <VisualState x:Name="WorkingVisualState">
+                    <Storyboard x:Name="IconRotation"
+                                AutoReverse="False"
+                                RepeatBehavior="Forever">
+                        <DoubleAnimation Storyboard.TargetName="refreshButtonIcon"
+                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"
+                                         To="360"
+                                         Duration="0:0:1" />
+                    </Storyboard>
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{x:Bind ViewModel.RefreshServicesCommand.IsRunning, Mode=OneWay}" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>

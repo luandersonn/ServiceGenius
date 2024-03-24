@@ -14,9 +14,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <controls:TitleBarControl Title="Services"
-                                  Height="32"
-                                  DisplayOptions="Title,Icon" />
+        <controls:TitleBarControl Title="Services" DisplayOptions="Title,Icon" />
 
         <NavigationView x:Name="navigationViewControl"
                         Grid.Row="1"
