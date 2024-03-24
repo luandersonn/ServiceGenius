@@ -16,6 +16,7 @@
     <None Remove="Pages\ServiceListViewPage.xaml" />
     <None Remove="Pages\SettingsPage.xaml" />
     <None Remove="Themes\Generic.xaml" />
+    <None Remove="Windowing\GeniusWindow.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -71,6 +72,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Windowing\GeniusWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

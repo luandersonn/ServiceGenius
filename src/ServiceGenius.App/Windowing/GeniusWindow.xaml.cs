@@ -2,14 +2,14 @@ using Microsoft.UI.Xaml;
 using System;
 using WinUIEx;
 
-namespace ServiceGenius.App;
+namespace ServiceGenius.App.Windowing;
 
-public sealed partial class MainWindow : WindowEx
+public sealed partial class GeniusWindow : WindowEx
 {
     private readonly Type destinationPage;
     private readonly object navigationParameter;
 
-    public MainWindow(Type destinationPage, object navigationParameter = null)
+    public GeniusWindow(Type destinationPage, object navigationParameter = null)
     {
         InitializeComponent();
         this.destinationPage = destinationPage;
