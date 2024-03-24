@@ -173,6 +173,7 @@
                         <TextBlock Grid.Row="2"
                                    Grid.Column="1"
                                    FontSize="12"
+                                   Style="{x:Bind Service.Status, Converter={StaticResource ServiceStatusToStyleConverter}, Mode=OneWay}"
                                    Text="{x:Bind Status}" />
 
 

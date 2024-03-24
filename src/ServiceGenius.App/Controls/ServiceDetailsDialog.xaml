@@ -52,14 +52,11 @@
                     </ComboBox.Header>
                 </ComboBox>
 
-                <Rectangle Height="1"
-                           Margin="0,12"
-                           Fill="{ThemeResource NavigationViewItemSeparatorForeground}" />
+                <TextBlock Style="{StaticResource ItemHeaderTextBlockStyle}" Text="Status" />
+                <TextBlock FontSize="12"
+                           Style="{x:Bind Service.Service.Status, Converter={StaticResource ServiceStatusToStyleConverter}, Mode=OneWay}"
+                           Text="{x:Bind Service.Status, Mode=OneWay}" />
 
-                <TextBlock Margin="0"
-                           Style="{StaticResource ItemHeaderTextBlockStyle}"
-                           Text="Status" />
-                <TextBlock Style="{StaticResource ItemValueTextBlockStyle}" Text="{x:Bind Service.Status, Mode=OneWay}" />
             </StackPanel>
         </ScrollView>
     </Grid>

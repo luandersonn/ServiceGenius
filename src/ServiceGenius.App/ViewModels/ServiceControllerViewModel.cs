@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using ServiceGenius.App.Collections;
+using ServiceGenius.App.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,28 +17,8 @@ public partial class ServiceControllerViewModel : ObservableObject
         LoadInfos();
     }
 
-    private static TwoWayDictionary<ServiceControllerStatus, string> StatusMap { get; } = new()
-    {
-        [ServiceControllerStatus.Running] = "Running",
-        [ServiceControllerStatus.StartPending] = "Start Pending",
-        [ServiceControllerStatus.StopPending] = "Stop Pending",
-        [ServiceControllerStatus.Stopped] = "Stopped",
-        [ServiceControllerStatus.ContinuePending] = "Continue Pending",
-        [ServiceControllerStatus.PausePending] = "Pause Pending",
-        [ServiceControllerStatus.Paused] = "Paused"
-    };
-
-    private static TwoWayDictionary<ServiceStartMode, string> StartModeMap { get; } = new()
-    {
-        [ServiceStartMode.Boot] = "Boot",
-        [ServiceStartMode.System] = "System",
-        [ServiceStartMode.Automatic] = "Automatic",
-        [ServiceStartMode.Manual] = "Manual",
-        [ServiceStartMode.Disabled] = "Disabled"
-    };
-
-    public IEnumerable<string> StatusValues => StatusMap.Type2Values;
-    public IEnumerable<string> StartModeValues => StartModeMap.Type2Values;
+    public IEnumerable<string> StatusValues => EnumMapperHelper.ServiceStatusMap.Type2Values;
+    public IEnumerable<string> StartModeValues => EnumMapperHelper.ServiceStartModeMap.Type2Values;
 
     public ServiceController Service { get; }
 
@@ -46,8 +26,8 @@ public partial class ServiceControllerViewModel : ObservableObject
     public string ServiceName => Service.ServiceName;
     public string Description { get; private set; }
     public string PathToExecutable { get; private set; }
-    public string Status => StatusMap[Service.Status];
-    public string StartMode => StartModeMap[Service.StartType];
+    public string Status => EnumMapperHelper.ServiceStatusMap[Service.Status];
+    public string StartMode => EnumMapperHelper.ServiceStartModeMap[Service.StartType];
 
     private void LoadInfos()
     {
