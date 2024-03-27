@@ -25,6 +25,8 @@
 
         <controls:TitleBarControl x:Name="titleBar"
                                   Title="Services"
+                                  BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}"
+                                  BorderThickness="0,0,0,1"
                                   DisplayOptions="None"
                                   PreferredHeightOption="Tall">
             <Grid ColumnSpacing="4">
@@ -52,7 +54,7 @@
                 </AutoSuggestBox>
 
                 <Button Grid.Column="2"
-                        Margin="0,8"
+                        Height="32"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Stretch"
                         AccessKey="S"

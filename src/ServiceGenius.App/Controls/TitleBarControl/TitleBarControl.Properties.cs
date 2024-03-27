@@ -54,7 +54,7 @@ public partial class TitleBarControl
     public double CaptionButtonHeight
     {
         get => (double)GetValue(CaptionButtonHeightProperty);
-        set => SetValue(CaptionButtonHeightProperty, value);
+        private set => SetValue(CaptionButtonHeightProperty, value);
     }
     public static readonly DependencyProperty CaptionButtonHeightProperty =
         DependencyProperty.Register("CaptionButtonHeight",
