@@ -15,6 +15,172 @@
 
     <Page.Resources>
         <x:Double x:Key="ContentMaxWidth">1036</x:Double>
+
+        <DataTemplate x:Key="DefaultServiceListTemplate" x:DataType="viewmodels:ServiceControllerViewModel">
+            <Grid Margin="2,0"
+                  Padding="8,16"
+                  Background="{ThemeResource ExpanderBackground}"
+                  BorderBrush="{ThemeResource ExpanderContentBorderBrush}"
+                  BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}"
+                  ColumnSpacing="8"
+                  CornerRadius="{ThemeResource ControlCornerRadius}">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.RowSpan="3"
+                      Width="30"
+                      Height="30"
+                      VerticalAlignment="Center">
+                    <FontIcon HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              FontSize="20"
+                              Glyph="&#xE713;" />
+                    <FontIcon Margin="15,17,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              FontSize="10"
+                              Glyph="&#xE713;" />
+                </Grid>
+
+                <TextBlock Grid.Row="0"
+                           Grid.Column="1"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           Text="{x:Bind DisplayName}"
+                           TextWrapping="Wrap" />
+
+
+                <TextBlock Grid.Row="1"
+                           Grid.Column="1"
+                           FontSize="12"
+                           Opacity="0.7"
+                           Text="{x:Bind Description}"
+                           TextTrimming="CharacterEllipsis" />
+
+                <TextBlock Grid.Row="2"
+                           Grid.Column="1"
+                           FontSize="12"
+                           Style="{x:Bind Service.Status, Converter={StaticResource ServiceStatusToStyleConverter}, Mode=OneWay}"
+                           Text="{x:Bind Status}" />
+
+
+                <FontIcon Grid.RowSpan="3"
+                          Grid.Column="2"
+                          FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                          FontSize="15"
+                          Glyph="&#xE76C;" />
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CompactServiceListTemplate" x:DataType="viewmodels:ServiceControllerViewModel">
+            <Grid Margin="2,0"
+                  Padding="8"
+                  Background="{ThemeResource ExpanderBackground}"
+                  BorderBrush="{ThemeResource ExpanderContentBorderBrush}"
+                  BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}"
+                  ColumnSpacing="8"
+                  CornerRadius="{ThemeResource ControlCornerRadius}">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+
+                <ToolTipService.ToolTip>
+                    <ToolTip>
+                        <ToolTip.Content>
+                            <StackPanel>
+                                <TextBlock FontSize="14"
+                                           FontWeight="SemiBold"
+                                           Text="{x:Bind DisplayName}"
+                                           TextTrimming="CharacterEllipsis"
+                                           TextWrapping="Wrap" />
+
+                                <TextBlock>
+                                    <Run Foreground="{ThemeResource SystemBaseMediumColor}" Text="Service name:" /> <Run Text="{x:Bind ServiceName}" />
+                                </TextBlock>
+
+                                <TextBlock FontSize="12"
+                                           Style="{x:Bind Service.Status, Converter={StaticResource ServiceStatusToStyleConverter}, Mode=OneWay}"
+                                           Text="{x:Bind Status}" />
+
+                                <TextBlock FontSize="12"
+                                           MaxLines="6"
+                                           Opacity="0.7"
+                                           Text="{x:Bind Description}"
+                                           TextTrimming="CharacterEllipsis"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+                        </ToolTip.Content>
+                    </ToolTip>
+                </ToolTipService.ToolTip>
+
+                <Grid Grid.RowSpan="3"
+                      Width="20"
+                      Height="20"
+                      VerticalAlignment="Center">
+                    <TextBlock HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                               FontSize="13"
+                               Style="{x:Bind Service.Status, Converter={StaticResource ServiceStatusToStyleConverter}, Mode=OneWay}"
+                               Text="&#xE713;" />
+
+                    <TextBlock Margin="11,11,0,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                               FontSize="9"
+                               Style="{x:Bind Service.Status, Converter={StaticResource ServiceStatusToStyleConverter}, Mode=OneWay}"
+                               Text="&#xE713;" />
+
+                    <FontIcon HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              FontSize="13"
+                              Glyph="&#xE713;"
+                              Visibility="Collapsed" />
+                    <FontIcon Margin="11,11,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              FontSize="9"
+                              Glyph="&#xE713;"
+                              Visibility="Collapsed" />
+                </Grid>
+
+
+                <TextBlock Grid.Column="1"
+                           VerticalAlignment="Center"
+                           FontSize="12"
+                           Text="{x:Bind DisplayName}"
+                           TextTrimming="CharacterEllipsis" />
+
+                <TextBlock Grid.Column="2"
+                           VerticalAlignment="Center"
+                           FontSize="12"
+                           MaxLines="1"
+                           Opacity="0.7"
+                           Text="{x:Bind Description}"
+                           TextTrimming="CharacterEllipsis"
+                           TextWrapping="NoWrap" />
+
+                <FontIcon Grid.RowSpan="3"
+                          Grid.Column="3"
+                          FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                          FontSize="15"
+                          Glyph="&#xE76C;" />
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
     <Grid>
@@ -71,16 +237,18 @@
             </Grid>
         </controls:TitleBarControl>
 
-        <ListView Grid.Row="1"
+        <ListView x:Name="serviceListControl"
+                  Grid.Row="1"
                   Background="{ThemeResource NavigationViewContentBackground}"
                   IsItemClickEnabled="True"
                   ItemClick="OnListViewItemClick"
+                  ItemTemplate="{StaticResource DefaultServiceListTemplate}"
                   ItemsSource="{x:Bind ViewModel.Services}"
                   SelectionMode="None">
             <ListViewBase.ItemContainerStyle>
                 <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem">
                     <Setter Property="Padding" Value="0" />
-                    <Setter Property="Margin" Value="12,1" />
+                    <Setter Property="Margin" Value="12,0" />
                     <Setter Property="MaxWidth" Value="{StaticResource ContentMaxWidth}" />
                 </Style>
             </ListViewBase.ItemContainerStyle>
@@ -120,73 +288,6 @@
             <ListViewBase.Footer>
                 <Rectangle Height="32" />
             </ListViewBase.Footer>
-
-            <ListViewBase.ItemTemplate>
-                <DataTemplate x:DataType="viewmodels:ServiceControllerViewModel">
-                    <Grid Margin="2,0"
-                          Padding="8,16"
-                          Background="{ThemeResource ExpanderBackground}"
-                          BorderBrush="{ThemeResource ExpanderContentBorderBrush}"
-                          BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}"
-                          ColumnSpacing="8"
-                          CornerRadius="{ThemeResource ControlCornerRadius}">
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40" />
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="40" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-
-                        <Grid Grid.RowSpan="3"
-                              Width="30"
-                              Height="30"
-                              VerticalAlignment="Center">
-                            <FontIcon HorizontalAlignment="Left"
-                                      VerticalAlignment="Top"
-                                      FontSize="20"
-                                      Glyph="&#xE713;" />
-                            <FontIcon Margin="15,17,0,0"
-                                      HorizontalAlignment="Left"
-                                      VerticalAlignment="Top"
-                                      FontSize="10"
-                                      Glyph="&#xE713;" />
-                        </Grid>
-
-                        <TextBlock Grid.Row="0"
-                                   Grid.Column="1"
-                                   VerticalAlignment="Center"
-                                   FontSize="16"
-                                   Text="{x:Bind DisplayName}"
-                                   TextWrapping="Wrap" />
-
-
-                        <TextBlock Grid.Row="1"
-                                   Grid.Column="1"
-                                   FontSize="12"
-                                   Opacity="0.7"
-                                   Text="{x:Bind Description}"
-                                   TextTrimming="CharacterEllipsis" />
-
-                        <TextBlock Grid.Row="2"
-                                   Grid.Column="1"
-                                   FontSize="12"
-                                   Style="{x:Bind Service.Status, Converter={StaticResource ServiceStatusToStyleConverter}, Mode=OneWay}"
-                                   Text="{x:Bind Status}" />
-
-
-                        <FontIcon Grid.RowSpan="3"
-                                  Grid.Column="2"
-                                  FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                  FontSize="15"
-                                  Glyph="&#xE76C;" />
-                    </Grid>
-                </DataTemplate>
-            </ListViewBase.ItemTemplate>
         </ListView>
 
         <ProgressRing Grid.Row="1" IsActive="{x:Bind ViewModel.RefreshServicesCommand.IsRunning, Mode=OneWay}" />
@@ -224,6 +325,7 @@
                         <Setter Target="searchBox.(Grid.Column)" Value="0" />
                         <Setter Target="searchBox.MaxWidth" Value="360" />
                         <Setter Target="titleBar.DisplayOptions" Value="Icon,Title" />
+                        <Setter Target="serviceListControl.ItemTemplate" Value="{StaticResource CompactServiceListTemplate}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
