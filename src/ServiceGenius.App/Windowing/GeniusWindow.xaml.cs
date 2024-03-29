@@ -23,4 +23,11 @@ public sealed partial class GeniusWindow : WindowEx
 
         frame.Navigate(destinationPage, navigationParameter);
     }
+
+    public ElementTheme RequestedTheme
+    {
+        get => WindowRootContainer.RequestedTheme;
+        set => WindowRootContainer.RequestedTheme = value;
+    }
+    public ElementTheme ActualTheme => WindowRootContainer.ActualTheme;
 }

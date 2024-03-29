@@ -12,4 +12,10 @@ public class SettingsViewModel
             return $"{packageVersion.Major}.{packageVersion.Minor}.{packageVersion.Build}";
         }
     }
+
+    public Microsoft.UI.Xaml.ElementTheme AppTheme
+    {
+        get => App.MainWindow.RequestedTheme;
+        set => App.MainWindow.RequestedTheme = value;
+    }
 }

@@ -77,6 +77,17 @@
                     </Grid>
 
 
+                    <TextBlock Margin="0,10,0,0" Text="App theme" />
+                    <Grid Style="{StaticResource ContentPanelStyle}">
+                        <StackPanel>
+                            <RadioButtons MaxColumns="3" SelectedIndex="{x:Bind AppTheme, Mode=TwoWay}">
+                                <RadioButton Content="Default" />
+                                <RadioButton Content="Light" />
+                                <RadioButton Content="Dark" />
+                            </RadioButtons>
+                        </StackPanel>
+                    </Grid>
+
                     <TextBlock Margin="0,10,0,0" Text="Libraries" />
                     <Grid Style="{StaticResource ContentPanelStyle}">
                         <StackPanel>

@@ -12,7 +12,7 @@
         <MicaBackdrop Kind="Base" />
     </winuiex:WindowEx.SystemBackdrop>
 
-    <Grid Loaded="OnUILoaded">
+    <Grid x:Name="WindowRootContainer" Loaded="OnUILoaded">
         <Frame x:Name="frame" />
     </Grid>
 </winuiex:WindowEx>
