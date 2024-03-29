@@ -1,5 +1,8 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
 using ServiceGenius.App.Pages;
+using ServiceGenius.App.Services;
+using ServiceGenius.App.Services.Settings;
 using ServiceGenius.App.Windowing;
 using System;
 using System.Collections.Concurrent;
@@ -16,6 +19,8 @@ public partial class App : Application
 {
     public App()
     {
+        Services = ConfigureServices();
+
         InitializeComponent();
 
         UnhandledException += OnAppUnhandledException;
@@ -29,6 +34,7 @@ public partial class App : Application
 
     public static ConcurrentDictionary<XamlRoot, Window> AllWindows { get; } = [];
     public static GeniusWindow MainWindow { get; private set; }
+    public IServiceProvider Services { get; }
 
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
@@ -44,7 +50,7 @@ public partial class App : Application
             return;
         }
 
-        MainWindow = new GeniusWindow(typeof(ServiceListViewPage))
+        MainWindow = new GeniusWindow(Services, typeof(ServiceListViewPage))
         {
             PersistenceId = "MainWindow"
         };
@@ -64,5 +70,16 @@ public partial class App : Application
                 IntPtr hwnd = MainWindow.GetWindowHandle();
                 HwndExtensions.RestoreWindow(hwnd);
             });
+    }
+
+    private static ServiceProvider ConfigureServices()
+    {
+        ServiceCollection services = new();
+
+        services
+            .AddSingleton<ISettings, AppSettings>()
+            ;
+
+        return services.BuildServiceProvider();
     }
 }

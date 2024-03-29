@@ -17,6 +17,7 @@ public partial class TitleBarControl
         await TryUpdateRegionsForCustomTitleBarAsync();
         SetWindowTitle(Title);
         SetWindowActiveState(Window.GetIsWindowActive() ? WindowActivationState.CodeActivated : WindowActivationState.Deactivated);
+        UpdateTheme();
     }
 
     private void OnUnloaded(object sender, RoutedEventArgs e)
